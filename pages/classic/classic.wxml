@@ -1,2 +1,1 @@
 <v-like />
-<view bind:tab="handleView">view</view>
