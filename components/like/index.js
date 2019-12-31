@@ -28,13 +28,14 @@ Component({
    */
   methods: {
     onLike: function(event) {
-      console.log(event);
       let { like, count } = this.properties;
       count = like ? count - 1 : count + 1;
       this.setData({
         like: !like,
         count
       });
+      const behavior = this.properties.like ? "like" : "cancel";
+      this.triggerEvent("like", { behavior });
     }
   }
 });

@@ -16,10 +16,11 @@ class HTTP {
         "content-type": "application/json",
         appkey: config.appkey
       },
+      data: params.data,
       success: res => {
         let code = res.statusCode.toString();
         if (code.startsWith("2")) {
-          params.success(res.data);
+          params.success && params.success(res.data);
         } else {
           const { error_code } = res.data;
           this._show_error(error_code);
