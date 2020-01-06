@@ -8,7 +8,10 @@ Component({
   /**
    * 组件的初始数据
    */
-  data: {},
+  data: {
+    pauseSrc: "images/player@pause.png",
+    playSrc: "images/player@play.png"
+  },
 
   /**
    * 组件的方法列表

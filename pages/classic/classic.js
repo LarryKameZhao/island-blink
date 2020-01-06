@@ -26,12 +26,13 @@ Page({
 
   onLike(event) {
     let { behavior } = event.detail;
-    console.log(this.data.classic.type);
-    console.log(this.data.classic.id);
-    console.log(behavior);
     likeModel.like(behavior, this.data.classic.id, this.data.classic.type);
   },
-
+  onPrevious(event) {
+    const index = this.data.classic.index;
+    classicModel.getPrevious(index, res => {});
+  },
+  onNext(event) {},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
