@@ -30,7 +30,14 @@ Page({
   },
   onPrevious(event) {
     const index = this.data.classic.index;
-    classicModel.getPrevious(index, res => {});
+
+    classicModel.getPrevious(index, res => {
+      this.setData({
+        classic: res,
+        latest: classicModel.isLatest(res.index),
+        first: classicModel.isFirst(res.index)
+      });
+    });
   },
   onNext(event) {},
   /**
