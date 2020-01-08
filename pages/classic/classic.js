@@ -29,9 +29,14 @@ Page({
     likeModel.like(behavior, this.data.classic.id, this.data.classic.type);
   },
   onPrevious(event) {
-    const index = this.data.classic.index;
-
-    classicModel.getPrevious(index, res => {
+    this._updateClassic("previous");
+  },
+  onNext(event) {
+    this._updateClassic("next");
+  },
+  _updateClassic(nextOrPrevious) {
+    const { index } = this.data.classic;
+    classicModel.getClassic(index, nextOrPrevious, res => {
       this.setData({
         classic: res,
         latest: classicModel.isLatest(res.index),
@@ -39,7 +44,7 @@ Page({
       });
     });
   },
-  onNext(event) {},
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
