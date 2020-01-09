@@ -17,7 +17,12 @@ Component({
     playSrc: "images/player@play.png",
     playing: false
   },
-
+  attached() {
+    this._recoverStatus();
+  },
+  detached() {
+    mMgr.stop();
+  },
   /**
    * 组件的方法列表
    */
@@ -34,6 +39,19 @@ Component({
           playing: false
         });
         mMgr.pause();
+      }
+    },
+    _recoverStatus() {
+      if (mMgr.paused) {
+        this.setData({
+          playing: false
+        });
+        return;
+      }
+      if (mMgr.src === this.properties.src) {
+        this.setData({
+          playing: true
+        });
       }
     }
   }
