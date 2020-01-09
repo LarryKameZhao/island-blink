@@ -1,6 +1,6 @@
-<view>
-  <image src="{{img}}" />
-  <image src="{{playSrc}}" />
-  <image src="images/music@tag.png" />
+<view hidden="{{hidden}}" class="container">
+  <image src="{{img}}" class="classic-img" />
+  <image src="{{playSrc}}" class="player-img" />
+  <image src="images/music@tag.png" class="tag" />
   <text>{{content}}</text>
 </view>

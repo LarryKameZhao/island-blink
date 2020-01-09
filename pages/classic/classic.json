@@ -2,6 +2,8 @@
   "usingComponents": {
     "v-like": "../components/like/index",
     "v-movie": "../components/classic/movie",
+    "v-music": "../components/classic/music",
+    "v-essay": "../components/classic/essay",
     "v-epsoide": "../components/classic/eposide",
     "v-navi": "../components/navi/navi"
   }
