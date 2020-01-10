@@ -19,6 +19,7 @@ Component({
   },
   attached() {
     this._recoverStatus();
+    this._monitorSwitch();
   },
   detached() {
     mMgr.stop();
@@ -53,6 +54,20 @@ Component({
           playing: true
         });
       }
+    },
+    _monitorSwitch() {
+      mMgr.onPlay(() => {
+        this._recoverStatus();
+      });
+      mMgr.onPause(() => {
+        this._recoverStatus();
+      });
+      mMgr.onStop(() => {
+        this._recoverStatus();
+      });
+      mMgr.onEnded(() => {
+        this._recoverStatus();
+      });
     }
   }
 });
