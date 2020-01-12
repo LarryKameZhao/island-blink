@@ -7,8 +7,10 @@ class BookModel extends HTTP {
       url: "book/hot_list"
     });
   }
-  test() {
-    console.log(1);
+  getMyBookCount() {
+    return this.request({
+      url: "/book/favor/count"
+    });
   }
 }
 

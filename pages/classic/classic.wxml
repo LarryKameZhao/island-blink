@@ -7,4 +7,4 @@
   <v-music wx:if="{{classic.type===200}}" src="{{classic.url}}" img="{{classic.image}}" content="{{classic.content}}"></v-music>
   <v-essay hidden="{{classic.type!==300}}" img="{{classic.image}}" content="{{classic.content}}"></v-essay>
   <v-navi bind:left="onNext" bind:right="onPrevious" class="navi" title="{{classic.title}}" first="{{first}}" latest="{{latest}}" />
-</view>
+</view> 
