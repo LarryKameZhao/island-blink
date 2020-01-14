@@ -3,13 +3,16 @@
     "pages/classic/classic",
     "pages/book",
     "pages/book/book",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/book-detail/book-detail"
   ],
   "window": {
     "navigationBarTitleText": "Blink"
   },
   "sitemapLocation": "sitemap.json",
-  "requiredBackgroundModes": ["audio"],
+  "requiredBackgroundModes": [
+    "audio"
+  ],
   "tabBar": {
     "selectedColor": "#000",
     "backgroundColor": "#fff",
