@@ -1,4 +1,6 @@
 import { BookModel } from "../../models/books.js";
+import { LikeModel } from "../../models/like.js";
+const likeModel = new LikeModel();
 const bookModel = new BookModel();
 Page({
   /**
@@ -38,6 +40,10 @@ Page({
         likeCount: res.fav_nums
       });
     });
+  },
+  onLike(event) {
+    const like_or_cancel = event.detail.behavior;
+    likeModel.like(like_or_cancel, this.data.book.id, 400);
   },
 
   /**
