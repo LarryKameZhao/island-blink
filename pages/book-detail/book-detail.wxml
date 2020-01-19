@@ -61,6 +61,7 @@
   </view>
   <input class="post" placeholder="短评最多12个字" />
 </view>
+<v-mask wx:if="{{posting}}" />
 <wxs module="tool">
   var highlight = function(index) {
     if(index==0) {
