@@ -39,7 +39,7 @@
     </view>
   </view>
 </view>
-<view class="post-container">
+<view class="post-container" wx:if="{{!posting}}">
   <view bind:tap="onFakePost" class="post-fake">
     <text>输入短评</text>
   </view>
@@ -47,3 +47,31 @@
     <v-like bind:like="onLike" class="like" like="{{likeStatus}}" count="{{likeCount}}" />
   </view>
 </view>
+<view class="posting-container" wx:if="{{posting}}">
+  <view class="post-header">
+    <text>仅可点击标签+1</text>
+    <text bind:tap="onCancel" class="cancel">取消</text>
+  </view>
+  <view class="comment-container">
+    <block wx:for="{{util.limit(comments,3)}}" wx:key="content">
+      <v-tag text="{{item.content}}">
+        <text class="num" slot="after">{{'+'+item.nums}}</text>
+      </v-tag>
+    </block>
+  </view>
+  <input class="post" placeholder="短评最多12个字" />
+</view>
+<wxs module="tool">
+  var highlight = function(index) {
+    if(index==0) {
+      return 'ex-tag1'
+    }
+    if(index == 1) {
+      return 'ex-tag2'
+    }
+    return ''
+  }
+  module.exports = {
+    highlight:highlight
+  }
+  </wxs>
