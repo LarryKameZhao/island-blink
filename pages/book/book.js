@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    books: {}
+    books: {},
+    searching: false
   },
 
   /**
@@ -52,5 +53,15 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {}
+  onShareAppMessage: function() {},
+  onSearching(event) {
+    this.setData({
+      searching: true
+    });
+  },
+  onCancel(event) {
+    this.setData({
+      searching: false
+    });
+  }
 });
