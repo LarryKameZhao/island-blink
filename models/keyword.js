@@ -1,6 +1,12 @@
-class KeywordModel {
+import { HTTP } from "../util/http_p.js";
+class KeywordModel extends HTTP {
   key = "q";
   maxLength = 10;
+  getHot() {
+    return this.request({
+      url: `book/hot_keyword`
+    });
+  }
   getHistory() {
     const words = wx.getStorageSync(this.key);
     if (!words) {
@@ -8,7 +14,6 @@ class KeywordModel {
     }
     return words;
   }
-  getHot() {}
   addToHistory(keyword) {
     let words = this.getHistory();
     const has = words.includes(keyword);
