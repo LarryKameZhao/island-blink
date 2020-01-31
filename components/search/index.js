@@ -1,12 +1,19 @@
 import { KeywordModel } from "../../models/keyword";
 import { BookModel } from "../../models/books";
+import { paginationBev } from "../behaviors/pagination";
 const bookModel = new BookModel();
 const keywordModel = new KeywordModel();
 Component({
   /**
    * 组件的属性列表
    */
-  properties: {},
+  behaviors: [paginationBev],
+  properties: {
+    more: {
+      type: String,
+      observer: "loadMore"
+    }
+  },
 
   /**
    * 组件的初始数据
@@ -14,9 +21,10 @@ Component({
   data: {
     historyWords: [],
     hotWords: [],
-    dataArray: [],
     searching: false,
-    q: ""
+    q: "",
+    loading: false,
+    loadingCenter: false
   },
   attached() {
     this.setData({
@@ -32,26 +40,71 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    loadMore() {
+      if (!this.data.q) {
+        return;
+      }
+      if (this.isLocked()) {
+        return;
+      }
+      if (this.hasMore()) {
+        this.locked();
+        bookModel.search(this.getCurrentStart(), this.data.q).then(res => {
+          this.setMoreData(res.books);
+          this.unLocked();
+        });
+      }
+    },
+
     onCancel(event) {
       this.triggerEvent("cancel", {}, {});
+      this.initialize();
     },
     onDelete(event) {
-      console.log("ondelete");
-      this.setData({
-        searching: false
-      });
+      this._closeResult();
+      this.initialize();
     },
     onConfirm(event) {
+      this._showResult();
+      this._showLoadingCenter();
+      const q = event.detail.value || event.detail.text;
+      if (!q) {
+        return;
+      }
+      bookModel.search(0, q).then(
+        res => {
+          this.setMoreData(res.books);
+          this.setTotal(res.total);
+          this.setData({
+            q
+          });
+          keywordModel.addToHistory(q);
+          this._hideLoadingCenter();
+        },
+        () => {
+          this.unLocked();
+        }
+      );
+    },
+    _showLoadingCenter() {
+      this.setData({
+        loadingCenter: true
+      });
+    },
+    _hideLoadingCenter() {
+      this.setData({
+        loadingCenter: false
+      });
+    },
+    _showResult() {
       this.setData({
         searching: true
       });
-      const q = event.detail.value || event.detail.text;
-      bookModel.search(0, q).then(res => {
-        this.setData({
-          dataArray: res.books,
-          q
-        });
-        keywordModel.addToHistory(q);
+    },
+    _closeResult() {
+      this.setData({
+        searching: false,
+        q: ""
       });
     }
   }

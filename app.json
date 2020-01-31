@@ -10,9 +10,7 @@
     "navigationBarTitleText": "Blink"
   },
   "sitemapLocation": "sitemap.json",
-  "requiredBackgroundModes": [
-    "audio"
-  ],
+  "requiredBackgroundModes": ["audio"],
   "tabBar": {
     "selectedColor": "#000",
     "backgroundColor": "#fff",
