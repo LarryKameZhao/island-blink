@@ -3,7 +3,10 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    authorized: false,
+    userInfo: null
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -16,23 +19,30 @@ Page({
   },
   onGetUserInfo(event) {
     const userInfo = event.detail.userInfo;
-    console.log(userInfo);
+    if (userInfo) {
+      this.setData({
+        userInfo,
+        authorized: true
+      });
+    }
   },
   userAuthorized() {
     wx.getSetting({
       success: data => {
-        console.log(data);
-        if (data.authSetting["scope.userinfo"]) {
+        if (data.authSetting["scope.userInfo"]) {
           wx.getUserInfo({
             success: data => {
-              console.log(data);
+              this.setData({
+                authorized: true,
+                userInfo: data.userInfo
+              });
             }
           });
-        } else {
         }
       }
     });
   },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
