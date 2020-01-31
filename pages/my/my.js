@@ -14,6 +14,10 @@ Page({
   getUserInfo(event) {
     console.log(event);
   },
+  onGetUserInfo(event) {
+    const userInfo = event.detail.userInfo;
+    console.log(userInfo);
+  },
   userAuthorized() {
     wx.getSetting({
       success: data => {
