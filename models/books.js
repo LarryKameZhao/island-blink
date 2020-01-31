@@ -21,6 +21,13 @@ class BookModel extends HTTP {
       url: "/book/favor/count"
     });
   }
+  getMyFavor(success) {
+    const params = {
+      url: "classic/favor",
+      success: success
+    };
+    this.request(params);
+  }
   getDetail(bid) {
     return this.request({
       url: `book/${bid}/detail`

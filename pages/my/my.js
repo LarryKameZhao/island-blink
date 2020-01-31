@@ -1,11 +1,18 @@
-// pages/my/my.js
+import { ClassicModel } from "../../models/classic.js";
+import { BookModel } from "../../models/books.js";
+
+const classicModel = new ClassicModel();
+const bookModel = new BookModel();
+
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     authorized: false,
-    userInfo: null
+    userInfo: null,
+    bookCount: 0,
+    classics: null
   },
 
   /**
@@ -13,6 +20,22 @@ Page({
    */
   onLoad: function(options) {
     this.userAuthorized();
+    this.getMyBookCount();
+    this.getMyFavor();
+  },
+  getMyBookCount() {
+    bookModel.getMyBookCount().then(res => {
+      this.setData({
+        bookCount: res.count
+      });
+    });
+  },
+  getMyFavor() {
+    classicModel.getMyFavor(res => {
+      this.setData({
+        classics: res
+      });
+    });
   },
   getUserInfo(event) {
     console.log(event);
@@ -42,7 +65,11 @@ Page({
       }
     });
   },
-
+  onJumpToAbout(event) {
+    wx.navigateTo({
+      url: "/pages/about/about"
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

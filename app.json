@@ -4,7 +4,8 @@
     "pages/book",
     "pages/book/book",
     "pages/my/my",
-    "pages/book-detail/book-detail"
+    "pages/book-detail/book-detail",
+    "pages/about/about"
   ],
   "window": {
     "navigationBarTitleText": "Blink"
